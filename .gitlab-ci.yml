@@ -1,0 +1,428 @@
+stages:
+  - plan_skeleton_production
+  - apply_skeleton_production
+  - plan_infrastructure_production
+  - apply_infrastructure_production
+  - autodoc_build
+  - autodoc_publish
+
+
+image: 826481595599.dkr.ecr.eu-west-1.amazonaws.com/terraform:v1.3-latest
+
+.before_script_template:
+  before_script:
+    ## ADD KEY FOR GIT ACCESS
+    # run ssh-agent
+    - "eval $(ssh-agent -s)"
+    # add ssh key stored in SSH_PRIVATE_KEY variable to the agent store
+    - echo "$GITLAB_CI_SSH_KEY" > /tmp/gitlab_ci_ssh
+    - chmod 600 /tmp/gitlab_ci_ssh
+    - ssh-add /tmp/gitlab_ci_ssh
+    - case "$CI_JOB_STAGE" in
+      *"_production")
+      export WORKSPACE_NAME="production"
+      export KEY="PRD"
+      ;;
+        *)
+      echo "-- FAILED - NO VALID WORKSPACE >> echo $WORKSPACE_NAME";
+      exit 1
+      ;;
+      esac
+    - |+
+      export MYKEY="AWS_ACCESS_KEY_ID_${KEY}"
+      export MYSECRET="AWS_SECRET_ACCESS_KEY_${KEY}"
+      export MYREGION="AWS_DEFAULT_REGION_${KEY}"
+      export AWS_ACCESS_KEY_ID=${!MYKEY}
+      export AWS_SECRET_ACCESS_KEY=${!MYSECRET}
+      export AWS_DEFAULT_REGION=${!MYREGION}
+
+## Templates
+
+.plan: &validate_plan
+  cache:
+    key: ${CI_COMMIT_BRANCH}-${CI_JOB_NAME}
+    paths:
+      - stacks/${STACK}/${SUBSTACK}/.terraform/providers
+  allow_failure: false
+  script:
+    - |
+      cd stacks/${STACK}/${SUBSTACK};
+      rm -rf .terraform/;
+      echo -e "* \n** \n**** Planning stack: ${STACK}/${SUBSTACK} \n** \n* "
+      terraform init -no-color -input=false
+      terraform workspace select ${WORKSPACE} -no-color || terraform workspace new ${WORKSPACE} -no-color
+      terraform plan -out=${WORKSPACE}.tfplan -var-file=${WORKSPACE}.tfvars -input=false -lock=true
+
+.apply: &apply
+  cache:
+    key: ${CI_COMMIT_BRANCH}-${CI_JOB_NAME}
+    paths:
+      - stacks/${STACK}/${SUBSTACK}/.terraform/providers
+  allow_failure: false
+  script:
+    - |
+      cd stacks/${STACK}/${SUBSTACK};
+      rm -rf .terraform/;
+      echo -e "* \n** \n**** Applying stack: ${STACK}/${SUBSTACK} \n** \n* "
+      terraform init -no-color -input=false
+      terraform workspace select ${WORKSPACE} -no-color || terraform workspace new ${WORKSPACE} -no-color
+      terraform apply -input=false -lock=true -auto-approve ${WORKSPACE}.tfplan
+
+.plan_skeleton: &plan_skeleton
+  script:
+    - |
+      cd stacks/skeleton;
+      for stack in init vpc route53 acm automon documentation
+      do
+        cd $stack;
+        if [ -e ${WORKSPACE}.tfvars ] ; then
+          rm -rf .terraform/
+          echo -e "* \n** \n**** Validate stack: skeleton/$stack \n** \n* "
+          terraform init -input=false
+          terraform workspace select ${WORKSPACE} -no-color || terraform workspace new ${WORKSPACE} -no-color
+          terraform validate
+          terraform plan -out=${WORKSPACE}.tfplan -var-file=${WORKSPACE}.tfvars -input=false -lock=true
+        fi
+        cd ../
+      done
+
+.apply_skeleton: &apply_skeleton
+  script:
+    - |
+      cd stacks/skeleton
+      for stack in init vpc route53 acm automon documentation; do
+        cd $stack
+        if [ -e ${WORKSPACE}.tfvars ] ; then
+          echo -e "* \n** \n**** Applying stack: skeleton/$stack \n** \n* "
+          terraform init -no-color -input=false
+          terraform workspace select ${WORKSPACE} -no-color || terraform workspace new ${WORKSPACE} -no-color
+          terraform apply -input=false -lock=true -auto-approve ${WORKSPACE}.tfplan
+        fi
+        cd ../
+      done
+
+##########################################
+#             production
+##########################################
+plan_skeleton_production:
+  extends: .before_script_template
+  stage: plan_skeleton_production
+  artifacts:
+    paths:
+      - stacks/skeleton/route53/${WORKSPACE}.tfplan
+      - stacks/skeleton/acm/${WORKSPACE}.tfplan
+      - stacks/skeleton/automon/${WORKSPACE}.tfplan
+      - stacks/skeleton/documentation/${WORKSPACE}.tfplan
+
+  except:
+    - tags
+  only:
+    refs:
+      - merge_requests
+      - master
+    changes:
+      - stacks/skeleton/route53/*.tf
+      - stacks/skeleton/route53/production.tfvars
+      - stacks/skeleton/acm/*.tf
+      - stacks/skeleton/acm/production.tfvars
+      - stacks/skeleton/automon/*.tf
+      - stacks/skeleton/automon/production.tfvars
+      - stacks/skeleton/documentation/*.tf
+      - stacks/skeleton/documentation/production.tfvars
+
+  <<: *plan_skeleton
+  variables:
+    WORKSPACE: production
+    VARIABLES_FILE: production.tfvars
+    STACK: skeleton
+    SUBSTACK: route53
+
+apply_skeleton_production:
+  extends: .before_script_template
+  stage: apply_skeleton_production
+  when: manual
+  <<: *apply_skeleton
+  dependencies:
+    - plan_skeleton_production
+  only:
+    refs:
+      - master
+    changes:
+      - stacks/skeleton/route53/*.tf
+      - stacks/skeleton/route53/production.tfvars
+      - stacks/skeleton/acm/*.tf
+      - stacks/skeleton/acm/production.tfvars
+      - stacks/skeleton/automon/*.tf
+      - stacks/skeleton/automon/production.tfvars
+      - stacks/skeleton/documentation/*.tf
+      - stacks/skeleton/documentation/production.tfvars
+
+  allow_failure: false
+  variables:
+    WORKSPACE: production
+    VARIABLES_FILE: production.tfvars
+    STACK: skeleton
+    SUBSTACK: route53
+
+infrastructure-ec2-plan-production:
+  extends: .before_script_template
+  stage: plan_infrastructure_production
+  except:
+    - tags
+  only:
+    refs:
+      - master
+      - merge_requests
+    changes:
+      - stacks/infrastructure/ec2/*.tf
+      - stacks/infrastructure/ec2/**/*.{json,sh}
+      - stacks/infrastructure/ec2/production.tfvars
+      - stacks/skeleton/**/*.tf
+      - stacks/skeleton/**/production.tfvars
+  allow_failure: false
+  artifacts:
+    paths:
+      - stacks/infrastructure/ec2/production.tfplan
+  <<: *validate_plan
+  variables:
+    WORKSPACE: production
+    VARIABLES_FILE: production.tfvars
+    STACK: infrastructure
+    SUBSTACK: ec2
+
+infrastructure-ec2-apply-production:
+  extends: .before_script_template
+  stage: apply_infrastructure_production
+  only:
+    refs:
+      - master
+    changes:
+      - stacks/infrastructure/ec2/*.tf
+      - stacks/infrastructure/ec2/**/*.{json,sh}
+      - stacks/infrastructure/ec2/production.tfvars
+      - stacks/skeleton/**/*.tf
+      - stacks/skeleton/**/production.tfvars
+  dependencies:
+    - infrastructure-ec2-plan-production
+  when: manual
+  allow_failure: false
+  <<: *apply
+  variables:
+    WORKSPACE: production
+    VARIABLES_FILE: production.tfvars
+    STACK: infrastructure
+    SUBSTACK: ec2
+
+infrastructure-ecr-plan-production:
+  extends: .before_script_template
+  stage: plan_infrastructure_production
+  except:
+    - tags
+  only:
+    refs:
+      - master
+      - merge_requests
+    changes:
+      - stacks/infrastructure/ecr/*.tf
+      - stacks/infrastructure/ecr/**/*.{json,sh}
+      - stacks/infrastructure/ecr/production.tfvars
+      - stacks/skeleton/**/*.tf
+      - stacks/skeleton/**/production.tfvars
+  allow_failure: false
+  artifacts:
+    paths:
+      - stacks/infrastructure/ecr/production.tfplan
+  <<: *validate_plan
+  variables:
+    WORKSPACE: production
+    VARIABLES_FILE: production.tfvars
+    STACK: infrastructure
+    SUBSTACK: ecr
+
+infrastructure-ecr-apply-production:
+  extends: .before_script_template
+  stage: apply_infrastructure_production
+  only:
+    refs:
+      - master
+    changes:
+      - stacks/infrastructure/ecr/*.tf
+      - stacks/infrastructure/ecr/**/*.{json,sh}
+      - stacks/infrastructure/ecr/production.tfvars
+      - stacks/skeleton/**/*.tf
+      - stacks/skeleton/**/production.tfvars
+  dependencies:
+    - infrastructure-ecr-plan-production
+  when: manual
+  allow_failure: false
+  <<: *apply
+  variables:
+    WORKSPACE: production
+    VARIABLES_FILE: production.tfvars
+    STACK: infrastructure
+    SUBSTACK: ecr
+
+infrastructure-eks-plan-production:
+  extends: .before_script_template
+  stage: plan_infrastructure_production
+  except:
+    - tags
+  only:
+    refs:
+      - master
+      - merge_requests
+    changes:
+      - stacks/infrastructure/eks/*.tf
+      - stacks/infrastructure/eks/**/*.{json,sh}
+      - stacks/infrastructure/eks/production.tfvars
+      - stacks/skeleton/**/*.tf
+      - stacks/skeleton/**/production.tfvars
+  allow_failure: false
+  artifacts:
+    paths:
+      - stacks/infrastructure/eks/production.tfplan
+  <<: *validate_plan
+  variables:
+    WORKSPACE: production
+    VARIABLES_FILE: production.tfvars
+    STACK: infrastructure
+    SUBSTACK: eks
+
+infrastructure-eks-apply-production:
+  extends: .before_script_template
+  stage: apply_infrastructure_production
+  only:
+    refs:
+      - master
+    changes:
+      - stacks/infrastructure/eks/*.tf
+      - stacks/infrastructure/eks/**/*.{json,sh}
+      - stacks/infrastructure/eks/production.tfvars
+      - stacks/skeleton/**/*.tf
+      - stacks/skeleton/**/production.tfvars
+  dependencies:
+    - infrastructure-eks-plan-production
+  when: manual
+  allow_failure: false
+  <<: *apply
+  variables:
+    WORKSPACE: production
+    VARIABLES_FILE: production.tfvars
+    STACK: infrastructure
+    SUBSTACK: eks
+
+infrastructure-s3-plan-production:
+  extends: .before_script_template
+  stage: plan_infrastructure_production
+  except:
+    - tags
+  only:
+    refs:
+      - master
+      - merge_requests
+    changes:
+      - stacks/infrastructure/s3/*.tf
+      - stacks/infrastructure/s3/**/*.{json,sh}
+      - stacks/infrastructure/s3/production.tfvars
+      - stacks/skeleton/**/*.tf
+      - stacks/skeleton/**/production.tfvars
+  allow_failure: false
+  artifacts:
+    paths:
+      - stacks/infrastructure/s3/production.tfplan
+  <<: *validate_plan
+  variables:
+    WORKSPACE: production
+    VARIABLES_FILE: production.tfvars
+    STACK: infrastructure
+    SUBSTACK: s3
+
+infrastructure-s3-apply-production:
+  extends: .before_script_template
+  stage: apply_infrastructure_production
+  only:
+    refs:
+      - master
+    changes:
+      - stacks/infrastructure/s3/*.tf
+      - stacks/infrastructure/s3/**/*.{json,sh}
+      - stacks/infrastructure/s3/production.tfvars
+      - stacks/skeleton/**/*.tf
+      - stacks/skeleton/**/production.tfvars
+  dependencies:
+    - infrastructure-s3-plan-production
+  when: manual
+  allow_failure: false
+  <<: *apply
+  variables:
+    WORKSPACE: production
+    VARIABLES_FILE: production.tfvars
+    STACK: infrastructure
+    SUBSTACK: s3
+
+autodoc_build:
+  image: 826481595599.dkr.ecr.eu-west-1.amazonaws.com/autodoc:latest
+  stage: autodoc_build
+  only:
+    refs:
+      - master
+  artifacts:
+    paths:
+      - auto-doc
+  script:
+    - if [[ ! -d "stacks/skeleton/documentation" ]] && [[ ! -d "stacks/infrastructure/documentation" ]]; then exit 0; fi # only run if we have a stacks/skeleton/documentation stack
+    - echo "Setting up autodocs"
+    - cp -r /var/task/* .
+    - ls -alh
+    - cd auto-doc
+    - ls -alh
+    - |
+      export MY_ACCESS_KEY="AWS_ACCESS_KEY_ID_PRD"
+      export MY_SECRET_KEY="AWS_SECRET_ACCESS_KEY_PRD"
+      export AWS_ACCESS_KEY_ID=${!MY_ACCESS_KEY};
+      export AWS_SECRET_ACCESS_KEY=${!MY_SECRET_KEY};
+      export MYREGION="AWS_DEFAULT_REGION_PRD"
+      export WORKSPACE="PRD"
+      export AWS_DEFAULT_REGION=${!MYREGION}
+      python autodoc_collector.py $AWS_DEFAULT_REGION $WORKSPACE $CUSTOMER;
+    - mkdocs new project
+    - python3 autodoc_generator.py
+    - cd project
+    - cp -r ../overrides ./overrides
+    - cp -r ../docs .
+    - | 
+      if [ -d "../../stacks/skeleton/documentation" ]; then
+        cp -r ../../stacks/skeleton/documentation/templates ../templates
+        cp -r ../../stacks/skeleton/documentation/images ../docs/assets/images
+        cp -r ../../stacks/skeleton/documentation/scripts ../scripts
+      elif [ -d "../../stacks/infrastructure/documentation" ]; then
+        cp -r ../../stacks/infrastructure/documentation/templates ../templates
+        cp -r ../../stacks/infrastructure/documentation/images ../docs/assets/images
+        cp -r ../../stacks/infrastructure/documentation/scripts ../scripts
+      fi
+    - mkdocs build
+  variables:
+    PRD: production
+
+
+auto-doc-publisher:
+  image: 826481595599.dkr.ecr.eu-west-1.amazonaws.com/wikipusher:latest
+  stage: autodoc_publish
+  dependencies:
+    - autodoc_build
+  only:
+    refs:
+      - master
+  artifacts:
+    paths:
+      - auto-doc
+  script:
+    - |
+      if [[ -d "stacks/skeleton/documentation" ]] || [[ -d "../../stacks/infrastructure/documentation" ]] ; then 
+        export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_PRD
+        export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_PRD
+        cd auto-doc
+        ls
+        export BUCKET=$(aws s3 ls |grep s3-doc- | awk -F ' ' '{print $3}')
+        aws s3 sync ./project/site s3://$BUCKET
+      fi

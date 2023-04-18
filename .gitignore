@@ -1,0 +1,18 @@
+# Local .terraform directories
+**/.terraform/*
+
+# Dirs to ignore
+virtualenv/
+zip-src/
+.venv/
+.idea/
+pki/
+
+# Files to ignore
+.DS_store
+*.zip
+*.ovpn
+
+# .tfstate files
+*.tfstate
+*.tfstate.*

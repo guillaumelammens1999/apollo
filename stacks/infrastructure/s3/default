@@ -1,0 +1,853 @@
+{
+  "version": 4,
+  "terraform_version": "1.3.0",
+  "serial": 36,
+  "lineage": "7e9e7362-a078-d342-ecaa-d29170fce9eb",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "data",
+      "type": "aws_caller_identity",
+      "name": "current",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "account_id": "570752136874",
+            "arn": "arn:aws:sts::570752136874:assumed-role/AWSReservedSSO_AWSAdministratorAccess_c9a33474e35a2985/guillaume.lammens@sentia.com",
+            "id": "570752136874",
+            "user_id": "AROAYJY32O2VJ23PI2JXS:guillaume.lammens@sentia.com"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_route53_zone",
+      "name": "simplyapollo",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:route53:::hostedzone/Z102759650JIN97ZM8O1",
+            "caller_reference": "RISWorkflow-RD:8be60b4f-fcbd-4c38-9a5f-50501a467fa4",
+            "comment": "Managed by Terraform",
+            "id": "Z102759650JIN97ZM8O1",
+            "linked_service_description": null,
+            "linked_service_principal": null,
+            "name": "simplyapollo.com",
+            "name_servers": [
+              "ns-384.awsdns-48.com",
+              "ns-1259.awsdns-29.org",
+              "ns-944.awsdns-54.net",
+              "ns-2034.awsdns-62.co.uk"
+            ],
+            "primary_name_server": "ns-384.awsdns-48.com",
+            "private_zone": false,
+            "resource_record_set_count": 5,
+            "tags": {
+              "CREATE_ALERT": "true",
+              "Guillaume": "true",
+              "customer": "apollo",
+              "environmentType": "DEFAULT",
+              "locksmith_name": "apollo",
+              "project": "apollo-mock-asg",
+              "region": "eu-central-1",
+              "serviceLevel": "MC",
+              "stack": "route53",
+              "terraform": "1.3",
+              "workspace": "default"
+            },
+            "vpc_id": null,
+            "zone_id": "Z102759650JIN97ZM8O1"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_secretsmanager_secret",
+      "name": "netbox-api",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"].sentinel",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR",
+            "description": "",
+            "id": "arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR",
+            "kms_key_id": "33b62d1d-b0fc-4c0d-a3da-0f553efd9d05",
+            "name": "sentia-secret-netbox-api",
+            "policy": "{\"Statement\":[{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::570752136874:root\",\"arn:aws:iam::775758810836:root\",\"arn:aws:iam::826481595599:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"Sentia\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::382014088590:root\",\"arn:aws:iam::605828743346:root\",\"arn:aws:iam::024928560708:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"AlfaPass\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::066502088765:root\",\"arn:aws:iam::705314514353:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"Argenta\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::787443276530:root\"},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"BEAWSCentralMgmt\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::213008303446:root\",\"arn:aws:iam::907481155153:root\",\"arn:aws:iam::696023580981:root\",\"arn:aws:iam::355567607949:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"CellCarta\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::860435703519:root\",\"arn:aws:iam::653971891669:root\",\"arn:aws:iam::396574074345:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"DieKeure\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::871148982447:root\",\"arn:aws:iam::572807611408:root\",\"arn:aws:iam::773037872956:root\",\"arn:aws:iam::426399108012:root\",\"arn:aws:iam::407673466635:root\",\"arn:aws:iam::566977587100:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"EnterpriseDevelopment\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::226547181394:root\",\"arn:aws:iam::215398632273:root\",\"arn:aws:iam::033853300474:root\",\"arn:aws:iam::134321026407:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"EnterpriseDevelopmentMicroservices\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::471916516063:root\",\"arn:aws:iam::983346341666:root\",\"arn:aws:iam::643383712638:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"FTV\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::393184302490:root\",\"arn:aws:iam::393538222644:root\",\"arn:aws:iam::050664376395:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"Lexigogo\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::521811699963:root\"},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"MGXAETN\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::645429486670:root\",\"arn:aws:iam::336011786672:root\",\"arn:aws:iam::551638711506:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"MGXDISAPAC\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::503480511022:root\",\"arn:aws:iam::675546397672:root\",\"arn:aws:iam::467856866224:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"MGXDISEMEA\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::385500056186:root\",\"arn:aws:iam::400094212684:root\",\"arn:aws:iam::046074518498:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"MGXDISJPN\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::664741721472:root\"},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"MGXRTL\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::087056272646:root\",\"arn:aws:iam::540643249413:root\",\"arn:aws:iam::044885717833:root\",\"arn:aws:iam::053246915811:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"Monizze\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::079113027491:root\",\"arn:aws:iam::681572300698:root\",\"arn:aws:iam::766993089024:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"NPO\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::697817825810:root\",\"arn:aws:iam::795343161513:root\",\"arn:aws:iam::464166159435:root\",\"arn:aws:iam::056030471228:root\",\"arn:aws:iam::159430536751:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"RentaSolutions\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::449990730470:root\",\"arn:aws:iam::600870346058:root\",\"arn:aws:iam::431274621178:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"SocialSeeder\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::357077671999:root\",\"arn:aws:iam::256149913916:root\",\"arn:aws:iam::830397705242:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"Televic\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::423570355858:root\",\"arn:aws:iam::059319448545:root\",\"arn:aws:iam::975126113333:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"WonCloud20\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::782582357825:root\",\"arn:aws:iam::390791279646:root\",\"arn:aws:iam::839085264113:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR\",\"Sid\":\"WonCloud21\"}],\"Version\":\"2012-10-17\"}",
+            "rotation_enabled": false,
+            "rotation_lambda_arn": "",
+            "rotation_rules": [],
+            "tags": {}
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_secretsmanager_secret",
+      "name": "powerdns",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"].sentinel",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD",
+            "description": "",
+            "id": "arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD",
+            "kms_key_id": "33b62d1d-b0fc-4c0d-a3da-0f553efd9d05",
+            "name": "sentia-secret-powerdns-api",
+            "policy": "{\"Statement\":[{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::775758810836:root\",\"arn:aws:iam::570752136874:root\",\"arn:aws:iam::826481595599:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"Sentia\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::382014088590:root\",\"arn:aws:iam::024928560708:root\",\"arn:aws:iam::605828743346:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"AlfaPass\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::066502088765:root\",\"arn:aws:iam::705314514353:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"Argenta\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::787443276530:root\"},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"BEAWSCentralMgmt\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::355567607949:root\",\"arn:aws:iam::213008303446:root\",\"arn:aws:iam::907481155153:root\",\"arn:aws:iam::696023580981:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"CellCarta\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::860435703519:root\",\"arn:aws:iam::396574074345:root\",\"arn:aws:iam::653971891669:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"DieKeure\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::572807611408:root\",\"arn:aws:iam::871148982447:root\",\"arn:aws:iam::566977587100:root\",\"arn:aws:iam::407673466635:root\",\"arn:aws:iam::426399108012:root\",\"arn:aws:iam::773037872956:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"EnterpriseDevelopment\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::033853300474:root\",\"arn:aws:iam::134321026407:root\",\"arn:aws:iam::215398632273:root\",\"arn:aws:iam::226547181394:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"EnterpriseDevelopmentMicroservices\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::983346341666:root\",\"arn:aws:iam::471916516063:root\",\"arn:aws:iam::643383712638:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"FTV\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::393538222644:root\",\"arn:aws:iam::393184302490:root\",\"arn:aws:iam::050664376395:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"Lexigogo\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::521811699963:root\"},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"MGXAETN\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::551638711506:root\",\"arn:aws:iam::336011786672:root\",\"arn:aws:iam::645429486670:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"MGXDISAPAC\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::467856866224:root\",\"arn:aws:iam::503480511022:root\",\"arn:aws:iam::675546397672:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"MGXDISEMEA\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::400094212684:root\",\"arn:aws:iam::385500056186:root\",\"arn:aws:iam::046074518498:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"MGXDISJPN\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::664741721472:root\"},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"MGXRTL\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::044885717833:root\",\"arn:aws:iam::053246915811:root\",\"arn:aws:iam::087056272646:root\",\"arn:aws:iam::540643249413:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"Monizze\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::766993089024:root\",\"arn:aws:iam::681572300698:root\",\"arn:aws:iam::079113027491:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"NPO\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::795343161513:root\",\"arn:aws:iam::159430536751:root\",\"arn:aws:iam::056030471228:root\",\"arn:aws:iam::464166159435:root\",\"arn:aws:iam::697817825810:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"RentaSolutions\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::431274621178:root\",\"arn:aws:iam::600870346058:root\",\"arn:aws:iam::449990730470:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"SocialSeeder\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::256149913916:root\",\"arn:aws:iam::357077671999:root\",\"arn:aws:iam::830397705242:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"Televic\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::423570355858:root\",\"arn:aws:iam::975126113333:root\",\"arn:aws:iam::059319448545:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"WonCloud20\"},{\"Action\":[\"secretsmanager:GetSecretValue\",\"secretsmanager:GetResourcePolicy\",\"secretsmanager:DescribeSecret\"],\"Effect\":\"Allow\",\"Principal\":{\"AWS\":[\"arn:aws:iam::782582357825:root\",\"arn:aws:iam::390791279646:root\",\"arn:aws:iam::839085264113:root\"]},\"Resource\":\"arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD\",\"Sid\":\"WonCloud21\"}],\"Version\":\"2012-10-17\"}",
+            "rotation_enabled": false,
+            "rotation_lambda_arn": "",
+            "rotation_rules": [],
+            "tags": {}
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_secretsmanager_secret_version",
+      "name": "netbox-api",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"].sentinel",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR",
+            "id": "arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR|AWSCURRENT",
+            "secret_binary": "",
+            "secret_id": "arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-netbox-api-XoKljR",
+            "secret_string": "a6f1939382573eef5dac14794f8526e8647dc180",
+            "version_id": "5BC52E97-F2C0-4636-8530-7C4FAA47D5F2",
+            "version_stage": "AWSCURRENT",
+            "version_stages": [
+              "AWSCURRENT"
+            ]
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "aws_secretsmanager_secret_version",
+      "name": "powerdns",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"].sentinel",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD",
+            "id": "arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD|AWSCURRENT",
+            "secret_binary": "",
+            "secret_id": "arn:aws:secretsmanager:eu-west-1:826481595599:secret:sentia-secret-powerdns-api-pOxvgD",
+            "secret_string": "173b36b1-bfda-489c-a9cb-ee2a0ae10e55",
+            "version_id": "BE13BEBF-3F7B-4359-A46F-4CB6BB54B141",
+            "version_stage": "AWSCURRENT",
+            "version_stages": [
+              "AWSCURRENT"
+            ]
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "netbox_tenant",
+      "name": "customer",
+      "provider": "provider[\"registry.terraform.io/e-breuninger/netbox\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "description": "IV_MigrationAccount",
+            "group_id": null,
+            "id": "8802",
+            "name": "be.sentia",
+            "slug": "be-sentia"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "netbox_vrf",
+      "name": "sentia_be",
+      "provider": "provider[\"registry.terraform.io/e-breuninger/netbox\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "9",
+            "name": "SentiaBE",
+            "tenant_id": 0
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudfront_distribution",
+      "name": "s3_distribution",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "aliases": [
+              "simplyapollo.com",
+              "www.simplyapollo.com"
+            ],
+            "arn": "arn:aws:cloudfront::570752136874:distribution/E2VICZ00OOSM5R",
+            "caller_reference": "terraform-20230307133702936000000001",
+            "comment": "Some comment",
+            "custom_error_response": [],
+            "default_cache_behavior": [
+              {
+                "allowed_methods": [
+                  "DELETE",
+                  "GET",
+                  "HEAD",
+                  "OPTIONS",
+                  "PATCH",
+                  "POST",
+                  "PUT"
+                ],
+                "cache_policy_id": "",
+                "cached_methods": [
+                  "GET",
+                  "HEAD"
+                ],
+                "compress": false,
+                "default_ttl": 3600,
+                "field_level_encryption_id": "",
+                "forwarded_values": [
+                  {
+                    "cookies": [
+                      {
+                        "forward": "none",
+                        "whitelisted_names": []
+                      }
+                    ],
+                    "headers": [],
+                    "query_string": false,
+                    "query_string_cache_keys": []
+                  }
+                ],
+                "function_association": [],
+                "lambda_function_association": [],
+                "max_ttl": 86400,
+                "min_ttl": 0,
+                "origin_request_policy_id": "",
+                "realtime_log_config_arn": "",
+                "response_headers_policy_id": "",
+                "smooth_streaming": false,
+                "target_origin_id": "s3origin",
+                "trusted_key_groups": [],
+                "trusted_signers": [],
+                "viewer_protocol_policy": "allow-all"
+              }
+            ],
+            "default_root_object": "index.html",
+            "domain_name": "dqvkiccgxufo4.cloudfront.net",
+            "enabled": true,
+            "etag": "E5B7J2EIYGEZF",
+            "hosted_zone_id": "Z2FDTNDATAQYW2",
+            "http_version": "http2",
+            "id": "E2VICZ00OOSM5R",
+            "in_progress_validation_batches": 0,
+            "is_ipv6_enabled": true,
+            "last_modified_time": "2023-03-13 08:44:15.537 +0000 UTC",
+            "logging_config": [],
+            "ordered_cache_behavior": [
+              {
+                "allowed_methods": [
+                  "GET",
+                  "HEAD",
+                  "OPTIONS"
+                ],
+                "cache_policy_id": "",
+                "cached_methods": [
+                  "GET",
+                  "HEAD",
+                  "OPTIONS"
+                ],
+                "compress": true,
+                "default_ttl": 86400,
+                "field_level_encryption_id": "",
+                "forwarded_values": [
+                  {
+                    "cookies": [
+                      {
+                        "forward": "none",
+                        "whitelisted_names": []
+                      }
+                    ],
+                    "headers": [
+                      "Origin"
+                    ],
+                    "query_string": false,
+                    "query_string_cache_keys": []
+                  }
+                ],
+                "function_association": [],
+                "lambda_function_association": [],
+                "max_ttl": 31536000,
+                "min_ttl": 0,
+                "origin_request_policy_id": "",
+                "path_pattern": "/*",
+                "realtime_log_config_arn": "",
+                "response_headers_policy_id": "",
+                "smooth_streaming": false,
+                "target_origin_id": "s3origin",
+                "trusted_key_groups": [],
+                "trusted_signers": [],
+                "viewer_protocol_policy": "redirect-to-https"
+              }
+            ],
+            "origin": [
+              {
+                "connection_attempts": 3,
+                "connection_timeout": 10,
+                "custom_header": [],
+                "custom_origin_config": [],
+                "domain_name": "gui-website-bucket.s3.eu-central-1.amazonaws.com",
+                "origin_access_control_id": "E3O62NPQXTGYWY",
+                "origin_id": "s3origin",
+                "origin_path": "",
+                "origin_shield": [],
+                "s3_origin_config": []
+              }
+            ],
+            "origin_group": [],
+            "price_class": "PriceClass_All",
+            "restrictions": [
+              {
+                "geo_restriction": [
+                  {
+                    "locations": [],
+                    "restriction_type": "none"
+                  }
+                ]
+              }
+            ],
+            "retain_on_delete": false,
+            "status": "Deployed",
+            "tags": {
+              "Environment": "production"
+            },
+            "tags_all": {
+              "CREATE_ALERT": "true",
+              "Environment": "production",
+              "customer": "apollo",
+              "environmentType": "DEFAULT",
+              "locksmith_name": "apollo",
+              "project": "apollo-mock-asg",
+              "region": "eu-central-1",
+              "serviceLevel": "MC",
+              "stack": "s3",
+              "terraform": "1.3",
+              "workspace": "default"
+            },
+            "trusted_key_groups": [
+              {
+                "enabled": false,
+                "items": []
+              }
+            ],
+            "trusted_signers": [
+              {
+                "enabled": false,
+                "items": []
+              }
+            ],
+            "viewer_certificate": [
+              {
+                "acm_certificate_arn": "arn:aws:acm:us-east-1:570752136874:certificate/284e17a0-8e4f-4ee1-bd0c-c4b3120333eb",
+                "cloudfront_default_certificate": false,
+                "iam_certificate_id": "",
+                "minimum_protocol_version": "TLSv1",
+                "ssl_support_method": "sni-only"
+              }
+            ],
+            "wait_for_deployment": true,
+            "web_acl_id": ""
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ==",
+          "dependencies": [
+            "aws_cloudfront_origin_access_control.OAIDistribution",
+            "module.aws_s3_mybucket.aws_s3_bucket.this"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_cloudfront_origin_access_control",
+      "name": "OAIDistribution",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "description": "Example Policy",
+            "etag": "ETVPDKIKX0DER",
+            "id": "E3O62NPQXTGYWY",
+            "name": "example",
+            "origin_access_control_origin_type": "s3",
+            "signing_behavior": "always",
+            "signing_protocol": "sigv4"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route53_record",
+      "name": "alias",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "alias": [
+              {
+                "evaluate_target_health": true,
+                "name": "dqvkiccgxufo4.cloudfront.net",
+                "zone_id": "Z2FDTNDATAQYW2"
+              }
+            ],
+            "allow_overwrite": true,
+            "cidr_routing_policy": [],
+            "failover_routing_policy": [],
+            "fqdn": "simplyapollo.com",
+            "geolocation_routing_policy": [],
+            "health_check_id": "",
+            "id": "Z102759650JIN97ZM8O1_simplyapollo.com_A",
+            "latency_routing_policy": [],
+            "multivalue_answer_routing_policy": false,
+            "name": "simplyapollo.com",
+            "records": [],
+            "set_identifier": "",
+            "ttl": 0,
+            "type": "A",
+            "weighted_routing_policy": [],
+            "zone_id": "Z102759650JIN97ZM8O1"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjIifQ==",
+          "dependencies": [
+            "aws_cloudfront_distribution.s3_distribution",
+            "aws_cloudfront_origin_access_control.OAIDistribution",
+            "data.aws_route53_zone.simplyapollo",
+            "module.aws_s3_mybucket.aws_s3_bucket.this"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route53_record",
+      "name": "www",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 2,
+          "attributes": {
+            "alias": [],
+            "allow_overwrite": null,
+            "cidr_routing_policy": [],
+            "failover_routing_policy": [],
+            "fqdn": "www.simplyapollo.com",
+            "geolocation_routing_policy": [],
+            "health_check_id": "",
+            "id": "Z102759650JIN97ZM8O1_www_CNAME",
+            "latency_routing_policy": [],
+            "multivalue_answer_routing_policy": false,
+            "name": "www",
+            "records": [
+              "simplyapollo.com"
+            ],
+            "set_identifier": "",
+            "ttl": 300,
+            "type": "CNAME",
+            "weighted_routing_policy": [],
+            "zone_id": "Z102759650JIN97ZM8O1"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjIifQ==",
+          "dependencies": [
+            "data.aws_route53_zone.simplyapollo"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "crmbucketcontent",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acceleration_status": "",
+            "acl": "private",
+            "arn": "arn:aws:s3:::crmbucketcontentapollo",
+            "bucket": "crmbucketcontentapollo",
+            "bucket_domain_name": "crmbucketcontentapollo.s3.amazonaws.com",
+            "bucket_prefix": null,
+            "bucket_regional_domain_name": "crmbucketcontentapollo.s3.eu-central-1.amazonaws.com",
+            "cors_rule": [],
+            "force_destroy": false,
+            "grant": [
+              {
+                "id": "b307a59122f717642b89cc2d08cc353eea251fd3f32bce9034eeddd8665202f7",
+                "permissions": [
+                  "FULL_CONTROL"
+                ],
+                "type": "CanonicalUser",
+                "uri": ""
+              }
+            ],
+            "hosted_zone_id": "Z21DNDUVLTQW6Q",
+            "id": "crmbucketcontentapollo",
+            "lifecycle_rule": [],
+            "logging": [],
+            "object_lock_configuration": [],
+            "object_lock_enabled": false,
+            "policy": "",
+            "region": "eu-central-1",
+            "replication_configuration": [],
+            "request_payer": "BucketOwner",
+            "server_side_encryption_configuration": [
+              {
+                "rule": [
+                  {
+                    "apply_server_side_encryption_by_default": [
+                      {
+                        "kms_master_key_id": "",
+                        "sse_algorithm": "AES256"
+                      }
+                    ],
+                    "bucket_key_enabled": false
+                  }
+                ]
+              }
+            ],
+            "tags": {},
+            "tags_all": {
+              "CREATE_ALERT": "true",
+              "customer": "apollo",
+              "environmentType": "DEFAULT",
+              "locksmith_name": "apollo",
+              "project": "apollo-mock-asg",
+              "region": "eu-central-1",
+              "serviceLevel": "MC",
+              "stack": "s3",
+              "terraform": "1.3",
+              "workspace": "default"
+            },
+            "timeouts": null,
+            "versioning": [
+              {
+                "enabled": false,
+                "mfa_delete": false
+              }
+            ],
+            "website": [],
+            "website_domain": null,
+            "website_endpoint": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19"
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_acl",
+      "name": "b_acl",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "access_control_policy": [
+              {
+                "grant": [
+                  {
+                    "grantee": [
+                      {
+                        "display_name": "",
+                        "email_address": "",
+                        "id": "b307a59122f717642b89cc2d08cc353eea251fd3f32bce9034eeddd8665202f7",
+                        "type": "CanonicalUser",
+                        "uri": ""
+                      }
+                    ],
+                    "permission": "FULL_CONTROL"
+                  }
+                ],
+                "owner": [
+                  {
+                    "display_name": "",
+                    "id": "b307a59122f717642b89cc2d08cc353eea251fd3f32bce9034eeddd8665202f7"
+                  }
+                ]
+              }
+            ],
+            "acl": "private",
+            "bucket": "gui-website-bucket",
+            "expected_bucket_owner": "",
+            "id": "gui-website-bucket,private"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "module.aws_s3_mybucket.aws_s3_bucket.this"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket_policy",
+      "name": "gui-website-policy",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "bucket": "gui-website-bucket",
+            "id": "gui-website-bucket",
+            "policy": "{\"Statement\":[{\"Action\":\"s3:GetObject\",\"Condition\":{\"StringEquals\":{\"AWS:SourceArn\":\"arn:aws:cloudfront::570752136874:distribution/E2VICZ00OOSM5R\"}},\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"cloudfront.amazonaws.com\"},\"Resource\":\"arn:aws:s3:::gui-website-bucket/*\",\"Sid\":\"AllowCloudFrontServicePrincipalReadOnly\"}],\"Version\":\"2012-10-17\"}"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "aws_cloudfront_distribution.s3_distribution",
+            "aws_cloudfront_origin_access_control.OAIDistribution",
+            "module.aws_s3_mybucket.aws_s3_bucket.this"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_object",
+      "name": "error_object",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acl": "private",
+            "bucket": "gui-website-bucket",
+            "bucket_key_enabled": false,
+            "cache_control": "",
+            "content": null,
+            "content_base64": null,
+            "content_disposition": "",
+            "content_encoding": "",
+            "content_language": "",
+            "content_type": "binary/octet-stream",
+            "etag": "2e76060ad01dd98be150d4d810e48d39",
+            "force_destroy": false,
+            "id": "error.html",
+            "key": "error.html",
+            "kms_key_id": null,
+            "metadata": {},
+            "object_lock_legal_hold_status": "",
+            "object_lock_mode": "",
+            "object_lock_retain_until_date": "",
+            "server_side_encryption": "AES256",
+            "source": "./html/error.html",
+            "source_hash": null,
+            "storage_class": "STANDARD",
+            "tags": {},
+            "tags_all": {
+              "CREATE_ALERT": "true",
+              "customer": "apollo",
+              "environmentType": "DEFAULT",
+              "locksmith_name": "apollo",
+              "project": "apollo-mock-asg",
+              "region": "eu-central-1",
+              "serviceLevel": "MC",
+              "stack": "s3",
+              "terraform": "1.3",
+              "workspace": "default"
+            },
+            "version_id": "_eMcbvALmkVk40pHgUTI.9ISkiRzUqlk",
+            "website_redirect": ""
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "module.aws_s3_mybucket.aws_s3_bucket.this"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_object",
+      "name": "index_object",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acl": "private",
+            "bucket": "gui-website-bucket",
+            "bucket_key_enabled": false,
+            "cache_control": "",
+            "content": null,
+            "content_base64": null,
+            "content_disposition": "",
+            "content_encoding": "",
+            "content_language": "",
+            "content_type": "text/html",
+            "etag": "3db819761b1225e6c1453ae82a45e200",
+            "force_destroy": false,
+            "id": "index.html",
+            "key": "index.html",
+            "kms_key_id": null,
+            "metadata": {},
+            "object_lock_legal_hold_status": "",
+            "object_lock_mode": "",
+            "object_lock_retain_until_date": "",
+            "server_side_encryption": "AES256",
+            "source": "./html/index.html",
+            "source_hash": null,
+            "storage_class": "STANDARD",
+            "tags": {},
+            "tags_all": {
+              "CREATE_ALERT": "true",
+              "customer": "apollo",
+              "environmentType": "DEFAULT",
+              "locksmith_name": "apollo",
+              "project": "apollo-mock-asg",
+              "region": "eu-central-1",
+              "serviceLevel": "MC",
+              "stack": "s3",
+              "terraform": "1.3",
+              "workspace": "default"
+            },
+            "version_id": "5EIav7SdHHTuE6mV8.Wjb9TKf5RHawX8",
+            "website_redirect": ""
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA==",
+          "dependencies": [
+            "module.aws_s3_mybucket.aws_s3_bucket.this"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.aws_s3_mybucket",
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "this",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "acceleration_status": "",
+            "acl": "private",
+            "arn": "arn:aws:s3:::gui-website-bucket",
+            "bucket": "gui-website-bucket",
+            "bucket_domain_name": "gui-website-bucket.s3.amazonaws.com",
+            "bucket_prefix": null,
+            "bucket_regional_domain_name": "gui-website-bucket.s3.eu-central-1.amazonaws.com",
+            "cors_rule": [],
+            "force_destroy": false,
+            "grant": [
+              {
+                "id": "b307a59122f717642b89cc2d08cc353eea251fd3f32bce9034eeddd8665202f7",
+                "permissions": [
+                  "FULL_CONTROL"
+                ],
+                "type": "CanonicalUser",
+                "uri": ""
+              }
+            ],
+            "hosted_zone_id": "Z21DNDUVLTQW6Q",
+            "id": "gui-website-bucket",
+            "lifecycle_rule": [],
+            "logging": [],
+            "object_lock_configuration": [],
+            "object_lock_enabled": false,
+            "policy": "{\"Statement\":[{\"Action\":\"s3:GetObject\",\"Condition\":{\"StringEquals\":{\"AWS:SourceArn\":\"arn:aws:cloudfront::570752136874:distribution/E2VICZ00OOSM5R\"}},\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"cloudfront.amazonaws.com\"},\"Resource\":\"arn:aws:s3:::gui-website-bucket/*\",\"Sid\":\"AllowCloudFrontServicePrincipalReadOnly\"}],\"Version\":\"2012-10-17\"}",
+            "region": "eu-central-1",
+            "replication_configuration": [],
+            "request_payer": "BucketOwner",
+            "server_side_encryption_configuration": [
+              {
+                "rule": [
+                  {
+                    "apply_server_side_encryption_by_default": [
+                      {
+                        "kms_master_key_id": "",
+                        "sse_algorithm": "AES256"
+                      }
+                    ],
+                    "bucket_key_enabled": false
+                  }
+                ]
+              }
+            ],
+            "tags": {},
+            "tags_all": {
+              "CREATE_ALERT": "true",
+              "customer": "apollo",
+              "environmentType": "DEFAULT",
+              "locksmith_name": "apollo",
+              "project": "apollo-mock-asg",
+              "region": "eu-central-1",
+              "serviceLevel": "MC",
+              "stack": "s3",
+              "terraform": "1.3",
+              "workspace": "default"
+            },
+            "timeouts": null,
+            "versioning": [
+              {
+                "enabled": true,
+                "mfa_delete": false
+              }
+            ],
+            "website": [],
+            "website_domain": "s3-website.eu-central-1.amazonaws.com",
+            "website_endpoint": "gui-website-bucket.s3-website.eu-central-1.amazonaws.com"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19"
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}
+
