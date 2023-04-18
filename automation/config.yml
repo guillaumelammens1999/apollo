@@ -1,0 +1,12 @@
+environments:
+  PRD: production
+ignore_stacks:
+  - infrastructure/test
+skeleton:
+  - init
+  - vpc
+  - route53
+  - acm
+  - automon
+  - documentation
+image: 826481595599.dkr.ecr.eu-west-1.amazonaws.com/terraform:v1.3-latest

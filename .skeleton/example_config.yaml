@@ -1,0 +1,11 @@
+account: 12345678901
+region: eu-west-1
+customer: Sentia
+project: test-project-1
+stacks:
+  skeleton:
+    - init
+    - vpc
+
+provider: 4.0
+terraform: 1.3

@@ -1,0 +1,9 @@
+---
+acm_create: "git@gitlab.infra.be.sentia.cloud:aws/landing-zones/terraform/modules/aws_acm_certificate/aws_acm_create.git"
+acm_validate: "git@gitlab.infra.be.sentia.cloud:aws/landing-zones/terraform/modules/aws_acm_certificate/aws_acm_validate.git"
+client_vpn: "git@gitlab.infra.be.sentia.cloud:aws/landing-zones/terraform/modules/aws_connections/aws_clientvpn.git"
+eks: "git@gitlab.infra.be.sentia.cloud:aws/landing-zones/terraform/modules/aws_eks.git"
+init: "git@gitlab.infra.be.sentia.cloud:aws/landing-zones/terraform/modules/aws_init.git"
+monitoring: "git@gitlab.infra.be.sentia.cloud:aws/landing-zones/terraform/modules/aws_monitoring/aws_new_relic.git"
+route53: "git@gitlab.infra.be.sentia.cloud:aws/landing-zones/terraform/modules/aws_route53.git"
+vpc: "git@gitlab.infra.be.sentia.cloud:aws/landing-zones/terraform/modules/aws_vpc.git"
